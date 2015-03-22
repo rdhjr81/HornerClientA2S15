@@ -48,6 +48,9 @@ public class HornerClientA2S15 {
     public static void main(String[] args) throws SocketException,UnknownHostException, IOException{
         
         /*
+        
+        //Code modified from Java SNTP client located at: http://support.ntp.org/bin/view/Support/JavaSntpClient
+        
         String serverName= "0.north-america.pool.ntp.org";
         
 	DatagramSocket socket = new DatagramSocket();
