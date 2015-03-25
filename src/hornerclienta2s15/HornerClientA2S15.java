@@ -49,7 +49,7 @@ public class HornerClientA2S15 {
     
     public static void main(String[] args) throws SocketException,UnknownHostException, IOException{
         
-        /*
+        
         
         //Code modified from Java SNTP client located at: http://support.ntp.org/bin/view/Support/JavaSntpClient
         
@@ -101,17 +101,17 @@ public class HornerClientA2S15 {
                     new DecimalFormat("0.00").format(roundTripDelay*1000) + " ms");
         
         socket.close();
-        */
+        
         //begin file xfer, get filename from user
         System.out.println("Enter filename in the form: c:\\path\\filename.mp3");
         
         Scanner input = new Scanner(System.in);
         
         //For actual usage
-        //String mp3Path = input.nextLine();
+        String mp3Path = input.nextLine();
         
         //For test purposes
-        String mp3Path = "/home/rob/Desktop/Link to Music/Alexandra\\ Stan\\ -\\ Mr.\\ Saxobeat.mp3";
+        //String mp3Path = "/home/rob/Desktop/Link to Music/Alexandra\\ Stan\\ -\\ Mr.\\ Saxobeat.mp3";
         
         byte[] sData = new byte[1024];
         
@@ -198,9 +198,9 @@ public class HornerClientA2S15 {
             System.out.println("Enter filename to save in the form:\n " +
                         "c:\\path\\filename.mp3");
             //diagnostic
-            mp3Path = "~/Desktop/Mr_Saxobeat.mp3";
+            //mp3Path = "~/Desktop/Mr_Saxobeat.mp3";
             //actual query
-            //mp3Path = input.nextLine();
+            mp3Path = input.nextLine();
 
             //create new file
             File newFile = new File(mp3Path);
