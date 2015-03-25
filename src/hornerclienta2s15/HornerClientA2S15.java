@@ -8,6 +8,7 @@ package hornerclienta2s15;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -15,6 +16,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.nio.channels.FileChannel;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -103,13 +105,13 @@ public class HornerClientA2S15 {
         //begin file xfer, get filename from user
         System.out.println("Enter filename in the form: c:\\path\\filename.mp3");
         
-        //Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         
         //For actual usage
         //String mp3Path = input.nextLine();
         
         //For test purposes
-        String mp3Path = "C:\\Users\\Robert\\Documents\\NetBeansProjects\\HornerServerA2S15\\mp3\\Leona.mp3";
+        String mp3Path = "/home/rob/Desktop/Link to Music/Alexandra\\ Stan\\ -\\ Mr.\\ Saxobeat.mp3";
         
         byte[] sData = new byte[1024];
         
@@ -156,6 +158,7 @@ public class HornerClientA2S15 {
             //nahhhhh
             //or just create temporary file to write to
             File temp = File.createTempFile("COSC_350_temp_file", ".tmp");
+            temp.deleteOnExit();
             FileOutputStream fOut = new FileOutputStream(temp);
             
             int index = 0;
@@ -185,10 +188,30 @@ public class HornerClientA2S15 {
                     System.out.println("Success!");
                     break;
                 }
+                //prompt for filename
+                
+                
                 
                 
             }
+            
+            System.out.println("Enter filename to save in the form:\n " +
+                        "c:\\path\\filename.mp3");
+            //diagnostic
+            mp3Path = "~/Desktop/Mr_Saxobeat.mp3";
+            //actual query
+            //mp3Path = input.nextLine();
+
+            //create new file
+            File newFile = new File(mp3Path);
+            FileChannel tempFileChannel = new FileInputStream(temp).getChannel();
+            FileChannel newFileChannel = new FileOutputStream(newFile).getChannel();
+
+            newFileChannel.transferFrom(tempFileChannel, 0, temp.length());
+            //close socket
             cSocket.close();
+            //annnnd done
+            System.out.println("File Received");
             System.out.println(temp.getName() + ""  + temp.getAbsolutePath());
         }
         
